@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/browser';
 import { ReusableRequest } from '../util';
 
 const searchRequest = new ReusableRequest();
@@ -13,7 +14,15 @@ export const search = (term) => searchRequest.makeRequest(
   currency: match['8. currency'],
 })));
 
-export const getPrice = (symbol) => {
-  console.log(symbol);
-  // TODO: Implement this
+export const getPrice = async (symbol) => {
+  const url = new URL('https://us-central1-investment-portfolio-manager.cloudfunctions.net/getPrice');
+  const params = new URLSearchParams({ symbol });
+  url.search = params;
+  try {
+    const response = await fetch(url);
+    return await response.json();
+  } catch (error) {
+    Sentry.captureException(error);
+    return null;
+  }
 };

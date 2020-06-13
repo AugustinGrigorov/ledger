@@ -7,7 +7,9 @@ import {
 
 import NavBar from './components/NavBar';
 import PrivateRoute from './components/PrivateRoute';
+
 import Configuration from './views/Configuration';
+import Overview from './views/Overview';
 
 function App() {
   return (
@@ -23,7 +25,7 @@ function App() {
           <Configuration />
         </PrivateRoute>
         <PrivateRoute path="/overview">
-          Overview
+          <Overview />
         </PrivateRoute>
       </Switch>
     </Router>
