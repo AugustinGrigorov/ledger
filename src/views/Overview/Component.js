@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { getPrice } from '../../services';
+import { getFundQuote } from '../../services';
 
 async function calculateTotalValue(assets) {
-  const assetValues = await Promise.all(assets.map(({ amount, symbol }) => getPrice(symbol)
-    .then(({ 'Global Quote': { '05. price': price } }) => (parseFloat(amount) * parseFloat(price)))));
+  const assetValues = await Promise.all(assets.map(({ amount, symbol }) => getFundQuote(symbol)
+    .then(({ 'Global Quote': { '05. price': price } }) => parseFloat(amount) * parseFloat(price))));
   return assetValues.reduce((acc, value) => acc + value, 0);
 }
 

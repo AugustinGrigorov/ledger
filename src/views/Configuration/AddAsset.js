@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { search } from '../../services';
+import { searchFunds } from '../../services';
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -113,7 +113,7 @@ function AddAsset({
               className={classes.input}
               onChange={({ target }) => {
                 setLoading(true);
-                search(target.value).then((res) => {
+                searchFunds(target.value).then((res) => {
                   setOptions(res);
                   setLoading(false);
                 });

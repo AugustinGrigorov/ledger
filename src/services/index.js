@@ -3,8 +3,8 @@ import { ReusableRequest } from '../util';
 
 const searchRequest = new ReusableRequest();
 
-export const search = (term) => searchRequest.makeRequest(
-  'https://us-central1-investment-portfolio-manager.cloudfunctions.net/search',
+export const searchFunds = (term) => searchRequest.makeRequest(
+  'https://us-central1-investment-portfolio-manager.cloudfunctions.net/searchFunds',
   { term },
 ).then(({ bestMatches = [] }) => bestMatches.map((match) => ({
   symbol: match['1. symbol'],
@@ -14,8 +14,8 @@ export const search = (term) => searchRequest.makeRequest(
   currency: match['8. currency'],
 })));
 
-export const getPrice = async (symbol) => {
-  const url = new URL('https://us-central1-investment-portfolio-manager.cloudfunctions.net/getPrice');
+export const getFundQuote = async (symbol) => {
+  const url = new URL('https://us-central1-investment-portfolio-manager.cloudfunctions.net/getFundQuote');
   const params = new URLSearchParams({ symbol });
   url.search = params;
   try {
